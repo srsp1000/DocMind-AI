@@ -1,0 +1,35 @@
+<svg width="960" height="320" viewBox="0 0 960 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="320" rx="24" fill="#0F172A"/>
+  <text x="60" y="64" fill="#E2E8F0" font-family="Arial, sans-serif" font-size="32" font-weight="700">Recurrent Neural Network (RNN)</text>
+  <text x="60" y="98" fill="#94A3B8" font-family="Arial, sans-serif" font-size="18">Input sequence flows left to right while the hidden state loops forward through time.</text>
+
+  <rect x="80" y="150" width="120" height="84" rx="16" fill="#1D4ED8"/>
+  <rect x="280" y="150" width="120" height="84" rx="16" fill="#1D4ED8"/>
+  <rect x="480" y="150" width="120" height="84" rx="16" fill="#1D4ED8"/>
+  <rect x="680" y="150" width="120" height="84" rx="16" fill="#1D4ED8"/>
+
+  <text x="130" y="198" fill="white" font-family="Arial, sans-serif" font-size="26" font-weight="700">h₁</text>
+  <text x="330" y="198" fill="white" font-family="Arial, sans-serif" font-size="26" font-weight="700">h₂</text>
+  <text x="530" y="198" fill="white" font-family="Arial, sans-serif" font-size="26" font-weight="700">h₃</text>
+  <text x="730" y="198" fill="white" font-family="Arial, sans-serif" font-size="26" font-weight="700">h₄</text>
+
+  <path d="M200 192H280" stroke="#38BDF8" stroke-width="8" stroke-linecap="round"/>
+  <path d="M400 192H480" stroke="#38BDF8" stroke-width="8" stroke-linecap="round"/>
+  <path d="M600 192H680" stroke="#38BDF8" stroke-width="8" stroke-linecap="round"/>
+  <path d="M240 140C240 102 440 102 440 140" stroke="#22C55E" stroke-width="7" stroke-linecap="round"/>
+  <path d="M440 140C440 102 640 102 640 140" stroke="#22C55E" stroke-width="7" stroke-linecap="round"/>
+  <path d="M640 140C640 102 840 102 840 140" stroke="#22C55E" stroke-width="7" stroke-linecap="round"/>
+
+  <polygon points="278,192 258,180 258,204" fill="#38BDF8"/>
+  <polygon points="478,192 458,180 458,204" fill="#38BDF8"/>
+  <polygon points="678,192 658,180 658,204" fill="#38BDF8"/>
+
+  <text x="88" y="264" fill="#CBD5E1" font-family="Arial, sans-serif" font-size="18">x₁</text>
+  <text x="288" y="264" fill="#CBD5E1" font-family="Arial, sans-serif" font-size="18">x₂</text>
+  <text x="488" y="264" fill="#CBD5E1" font-family="Arial, sans-serif" font-size="18">x₃</text>
+  <text x="688" y="264" fill="#CBD5E1" font-family="Arial, sans-serif" font-size="18">x₄</text>
+  <text x="178" y="264" fill="#CBD5E1" font-family="Arial, sans-serif" font-size="18">y₁</text>
+  <text x="378" y="264" fill="#CBD5E1" font-family="Arial, sans-serif" font-size="18">y₂</text>
+  <text x="578" y="264" fill="#CBD5E1" font-family="Arial, sans-serif" font-size="18">y₃</text>
+  <text x="778" y="264" fill="#CBD5E1" font-family="Arial, sans-serif" font-size="18">y₄</text>
+</svg>

@@ -1,0 +1,29 @@
+<svg width="960" height="320" viewBox="0 0 960 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="320" rx="24" fill="#0F172A"/>
+  <text x="60" y="64" fill="#E2E8F0" font-family="Arial, sans-serif" font-size="32" font-weight="700">Transformer / Self-Attention</text>
+  <text x="60" y="98" fill="#94A3B8" font-family="Arial, sans-serif" font-size="18">Tokens enter self-attention, then a feed-forward block, and exit with context-aware representations.</text>
+
+  <rect x="90" y="150" width="150" height="96" rx="16" fill="#1D4ED8"/>
+  <text x="118" y="188" fill="white" font-family="Arial, sans-serif" font-size="20" font-weight="700">Input tokens</text>
+  <text x="116" y="220" fill="#DBEAFE" font-family="Arial, sans-serif" font-size="16">x₁  x₂  x₃  x₄</text>
+
+  <path d="M260 198H360" stroke="#38BDF8" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="360,198 338,186 338,210" fill="#38BDF8"/>
+
+  <rect x="380" y="126" width="190" height="140" rx="18" fill="#0F766E"/>
+  <text x="420" y="176" fill="white" font-family="Arial, sans-serif" font-size="24" font-weight="700">Multi-Head</text>
+  <text x="426" y="208" fill="white" font-family="Arial, sans-serif" font-size="24" font-weight="700">Attention</text>
+  <path d="M420 104C456 76 494 76 530 104" stroke="#22C55E" stroke-width="7" stroke-linecap="round"/>
+  <path d="M414 114C470 58 520 58 576 114" stroke="#F59E0B" stroke-width="7" stroke-linecap="round"/>
+
+  <path d="M590 198H690" stroke="#38BDF8" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="690,198 668,186 668,210" fill="#38BDF8"/>
+
+  <rect x="710" y="136" width="160" height="124" rx="18" fill="#7C3AED"/>
+  <text x="744" y="186" fill="white" font-family="Arial, sans-serif" font-size="24" font-weight="700">Feed</text>
+  <text x="740" y="218" fill="white" font-family="Arial, sans-serif" font-size="24" font-weight="700">Forward</text>
+
+  <path d="M790 124V100" stroke="#CBD5E1" stroke-width="6" stroke-linecap="round"/>
+  <path d="M790 260V284" stroke="#CBD5E1" stroke-width="6" stroke-linecap="round"/>
+  <text x="730" y="306" fill="#CBD5E1" font-family="Arial, sans-serif" font-size="18">Context-aware output</text>
+</svg>

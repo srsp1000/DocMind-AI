@@ -1,0 +1,36 @@
+<svg width="960" height="320" viewBox="0 0 960 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="320" rx="24" fill="#0F172A"/>
+  <text x="60" y="64" fill="#E2E8F0" font-family="Arial, sans-serif" font-size="32" font-weight="700">Convolutional Neural Network (CNN)</text>
+  <text x="60" y="98" fill="#94A3B8" font-family="Arial, sans-serif" font-size="18">An image passes through convolution, pooling, and dense layers before classification.</text>
+
+  <rect x="80" y="140" width="120" height="120" rx="16" fill="#1E293B" stroke="#38BDF8" stroke-width="4"/>
+  <rect x="110" y="170" width="60" height="60" rx="8" fill="#2563EB"/>
+  <text x="96" y="284" fill="#CBD5E1" font-family="Arial, sans-serif" font-size="18">Input image</text>
+
+  <path d="M220 200H320" stroke="#38BDF8" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="320,200 298,188 298,212" fill="#38BDF8"/>
+
+  <rect x="340" y="156" width="92" height="92" rx="14" fill="#1D4ED8"/>
+  <rect x="366" y="130" width="92" height="92" rx="14" fill="#2563EB" opacity="0.85"/>
+  <rect x="392" y="104" width="92" height="92" rx="14" fill="#38BDF8" opacity="0.7"/>
+  <text x="340" y="284" fill="#CBD5E1" font-family="Arial, sans-serif" font-size="18">Feature maps</text>
+
+  <path d="M494 200H594" stroke="#38BDF8" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="594,200 572,188 572,212" fill="#38BDF8"/>
+
+  <rect x="614" y="150" width="110" height="100" rx="16" fill="#14532D"/>
+  <circle cx="646" cy="182" r="12" fill="#22C55E"/>
+  <circle cx="692" cy="182" r="12" fill="#22C55E"/>
+  <circle cx="646" cy="220" r="12" fill="#22C55E"/>
+  <circle cx="692" cy="220" r="12" fill="#22C55E"/>
+  <text x="634" y="284" fill="#CBD5E1" font-family="Arial, sans-serif" font-size="18">Pooling</text>
+
+  <path d="M744 200H844" stroke="#38BDF8" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="844,200 822,188 822,212" fill="#38BDF8"/>
+
+  <rect x="854" y="136" width="54" height="128" rx="18" fill="#7C3AED"/>
+  <circle cx="881" cy="166" r="9" fill="white"/>
+  <circle cx="881" cy="200" r="9" fill="white"/>
+  <circle cx="881" cy="234" r="9" fill="white"/>
+  <text x="830" y="284" fill="#CBD5E1" font-family="Arial, sans-serif" font-size="18">Dense / output</text>
+</svg>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DocMind AI — Learn Smarter</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<!-- Background orbs -->
+<div class="bg-orb orb1"></div>
+<div class="bg-orb orb2"></div>
+<div class="bg-orb orb3"></div>
+
+<!-- Header -->
+<header class="header">
+  <div class="header-inner">
+    <div class="logo">
+      <div class="logo-icon">🧠</div>
+      <span class="logo-text">DocMind</span>
+      <span class="logo-badge">AI</span>
+    </div>
+    <div class="header-right">
+      <div class="backend-toggle" id="backendToggle">
+        <button class="toggle-btn active" data-value="Groq (Cloud)" onclick="setBackend(this)">
+          <span class="toggle-dot groq-dot"></span> Groq Cloud
+        </button>
+        <button class="toggle-btn" data-value="Ollama (Local)" onclick="setBackend(this)">
+          <span class="toggle-dot ollama-dot"></span> Ollama Local
+        </button>
+      </div>
+      <div class="model-badge" id="modelBadge">llama-3.1-8b · Cloud</div>
+    </div>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-eyebrow">⚡ Enterprise RAG Document Intelligence</div>
+  <h1 class="hero-title">
+    <span class="grad-text">Learn Smarter,</span><br>
+    <span class="hero-dim">Not Harder.</span>
+  </h1>
+  <p class="hero-sub">Upload any PDF · Retrieve relevant context · Generate with AI</p>
+</section>
+
+<!-- Main grid -->
+<main class="main-grid">
+
+  <!-- LEFT: Upload + Output -->
+  <div class="col-left">
+
+    <!-- Upload card -->
+    <div class="card" id="uploadCard">
+      <div class="card-label">📂 Upload Document</div>
+      <div class="drop-zone" id="dropZone">
+        <div class="drop-icon">☁️</div>
+        <div class="drop-title">Drag & drop your PDF here</div>
+        <div class="drop-sub">or click to browse · PDF only</div>
+        <input type="file" id="fileInput" accept=".pdf" hidden>
+      </div>
+      <div class="file-preview hidden" id="filePreview">
+        <div class="file-icon-wrap">📄</div>
+        <div class="file-info">
+          <div class="file-name" id="fileName">—</div>
+          <div class="file-meta" id="fileMeta">—</div>
+        </div>
+        <button class="file-remove" onclick="removeFile()" title="Remove">✕</button>
+      </div>
+      <div class="rag-status hidden" id="ragStatus" onclick="openMetrics()" style="cursor:pointer" title="Click for pipeline analytics">
+        <span class="rag-dot"></span>
+        <span id="ragStatusText">RAG ACTIVE · 0 vectors</span>
+        <span style="margin-left:auto;font-size:0.65rem;opacity:0.7">📊</span>
+      </div>
+      <div class="upload-progress hidden" id="uploadProgress">
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        <div class="progress-label" id="progressLabel">Processing…</div>
+      </div>
+    </div>
+
+    <!-- Output card -->
+    <div class="card" id="outputCard">
+      <div class="card-label-row">
+        <div class="card-label">📘 Generated Result</div>
+        <button class="copy-btn hidden" id="copyBtn" onclick="copyOutput()" title="Copy">⎘ Copy</button>
+      </div>
+      <div class="output-empty" id="outputEmpty">
+        <div class="empty-icon">✦</div>
+        <div class="empty-title">No output yet</div>
+        <div class="empty-sub">Upload a PDF and click Generate</div>
+      </div>
+      <div class="output-box hidden" id="outputBox"></div>
+      <div class="citations-container hidden" id="outputCitations"></div>
+      <button class="dl-btn hidden" id="dlBtn" onclick="downloadPDF()">⬇ Download as PDF</button>
+    </div>
+
+  </div>
+
+  <!-- RIGHT: Controls + Chat -->
+  <div class="col-right">
+
+    <!-- Config card -->
+    <div class="card">
+      <div class="card-label">⚙️ Configure Output</div>
+
+      <label class="field-label">Search Strategy</label>
+      <div class="diff-row" id="searchModeRow">
+        <button class="diff-btn easy active" onclick="setSearchMode(this,'hybrid')" data-mode="hybrid">⚡ Hybrid</button>
+        <button class="diff-btn med" onclick="setSearchMode(this,'dense')" data-mode="dense">🔷 Dense</button>
+        <button class="diff-btn hard" onclick="setSearchMode(this,'sparse')" data-mode="sparse">📝 Sparse</button>
+      </div>
+
+      <label class="field-label" style="margin-top:10px">Engine</label>
+      <div class="diff-row" id="frameworkRow">
+        <button class="diff-btn easy active" onclick="setFramework(this,'native')" data-fw="native">🐍 Native</button>
+        <button class="diff-btn med" onclick="setFramework(this,'langchain')" data-fw="langchain">🔗 LangChain</button>
+      </div>
+
+      <label class="field-label" style="margin-top:14px">Output Type</label>
+      <div class="select-wrap">
+        <select id="outputType">
+          <option>Summary</option>
+          <option>Important Questions</option>
+          <option selected>Viva Questions</option>
+          <option>MCQs</option>
+        </select>
+        <span class="select-arrow">▾</span>
+      </div>
+
+      <label class="field-label" style="margin-top:14px">Difficulty Level</label>
+      <div class="diff-row">
+        <button class="diff-btn easy" onclick="setDiff(this,'Easy')">Easy</button>
+        <button class="diff-btn med active" onclick="setDiff(this,'Medium')">Medium</button>
+        <button class="diff-btn hard" onclick="setDiff(this,'Hard')">Hard</button>
+      </div>
+
+      <button class="gen-btn" id="genBtn" onclick="generate()" disabled>
+        <span class="gen-icon">⚡</span>
+        <span id="genBtnText">Generate Content</span>
+      </button>
+      <div class="gen-hint" id="genHint">Upload a PDF to enable</div>
+
+      <button class="fc-trigger-btn" id="fcBtn" onclick="openFcModal()" style="display:none">
+        🃏 Generate Flashcards
+      </button>
+    </div>
+
+    <!-- Chat card -->
+    <div class="card chat-card hidden" id="chatCard">
+      <div class="card-label">💬 Ask About This Content</div>
+      <div class="chat-messages" id="chatMessages">
+        <div class="chat-empty">Ask anything about the generated content</div>
+      </div>
+      <div class="chat-input-row">
+        <input type="text" class="chat-input" id="chatInput" placeholder="Ask a follow-up question…" onkeydown="if(event.key==='Enter')sendChat()">
+        <button class="chat-send" onclick="sendChat()">Send</button>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- Metrics Dashboard Modal -->
+<div class="metrics-overlay hidden" id="metricsOverlay" onclick="if(event.target===this)closeMetrics()">
+  <div class="metrics-modal">
+    <div class="fc-modal-header">
+      <span class="fc-modal-title">📊 Pipeline Analytics</span>
+      <button class="fc-modal-close" onclick="closeMetrics()">✕</button>
+    </div>
+    <div class="metrics-body" id="metricsBody">
+      <div class="metrics-empty">Run some queries to see analytics</div>
+    </div>
+  </div>
+</div>
+
+<script src="/static/app.js?v=6"></script>
+
+<!-- ══ FLASHCARD MODAL ══ -->
+<div class="fc-overlay hidden" id="fcOverlay" onclick="if(event.target===this)closeFcModal()">
+  <div class="fc-modal">
+
+    <!-- Settings screen -->
+    <div id="fcSettings">
+      <div class="fc-modal-header">
+        <span class="fc-modal-title">🃏 Flashcard Generator</span>
+        <button class="fc-modal-close" onclick="closeFcModal()">✕</button>
+      </div>
+      <div class="fc-modal-body">
+        <p class="fc-modal-sub">AI will generate Q&amp;A cards from your PDF using RAG retrieval.</p>
+        <label class="field-label">Number of Cards</label>
+        <div class="fc-count-row">
+          <button class="fc-count-btn" onclick="setFcCount(this,5)">5</button>
+          <button class="fc-count-btn fc-count-active" onclick="setFcCount(this,10)">10</button>
+          <button class="fc-count-btn" onclick="setFcCount(this,15)">15</button>
+          <button class="fc-count-btn" onclick="setFcCount(this,20)">20</button>
+        </div>
+        <label class="field-label" style="margin-top:16px">Difficulty</label>
+        <div class="diff-row">
+          <button class="diff-btn easy" onclick="setFcDiff(this,'Easy')">Easy</button>
+          <button class="diff-btn med active" onclick="setFcDiff(this,'Medium')">Medium</button>
+          <button class="diff-btn hard" onclick="setFcDiff(this,'Hard')">Hard</button>
+        </div>
+      </div>
+      <button class="fc-gen-btn" id="fcGenBtn" onclick="generateFlashcards()">
+        <span id="fcGenText">⚡ Generate Flashcards</span>
+      </button>
+    </div>
+
+    <!-- Flashcard viewer screen -->
+    <div id="fcViewer" style="display:none">
+      <!-- Header -->
+      <div class="fc-vh">
+        <div class="fc-vh-left">
+          <span class="fc-modal-title">🃏 Flashcards</span>
+          <span class="fc-card-counter" id="fcCounter">1 / 10</span>
+        </div>
+        <div class="fc-vh-right">
+          <button class="fc-export-btn" onclick="exportCSV()">⬇ CSV</button>
+          <button class="fc-export-btn" onclick="exportAnki()">⬇ Anki</button>
+          <button class="fc-modal-close" onclick="closeFcModal()">✕</button>
+        </div>
+      </div>
+
+      <!-- Progress -->
+      <div class="fc-prog-wrap">
+        <div class="fc-prog-bar"><div class="fc-prog-fill" id="fcProgFill"></div></div>
+        <div class="fc-prog-stats">
+          <span class="fc-stat-known" id="fcStatKnown">0 ✓</span>
+          <span class="fc-stat-review" id="fcStatReview">0 ✗</span>
+          <span class="fc-stat-left" id="fcStatLeft">0 left</span>
+        </div>
+      </div>
+
+      <!-- Flip card -->
+      <div class="fc-flip-wrap">
+        <button class="fc-arrow" id="fcPrev" onclick="fcNav(-1)">‹</button>
+        <div class="fc-flip" id="fcFlip" onclick="fcFlipCard()">
+          <div class="fc-flip-inner" id="fcFlipInner">
+            <div class="fc-flip-front">
+              <div class="fc-side-label">Question</div>
+              <div class="fc-side-text" id="fcQ">—</div>
+              <div class="fc-flip-hint">Click to flip</div>
+            </div>
+            <div class="fc-flip-back">
+              <div class="fc-side-label" style="color:var(--cyan)">Answer</div>
+              <div class="fc-side-text" id="fcA">—</div>
+            </div>
+          </div>
+        </div>
+        <button class="fc-arrow" id="fcNext" onclick="fcNav(1)">›</button>
+      </div>
+
+      <!-- Rate buttons -->
+      <div class="fc-rate-row" id="fcRateRow">
+        <button class="fc-rate fc-rate-no"  onclick="fcRate(false)">✗ Need Review</button>
+        <button class="fc-rate fc-rate-yes" onclick="fcRate(true)">✓ Got It</button>
+      </div>
+
+      <!-- Dot strip -->
+      <div class="fc-dots" id="fcDots"></div>
+    </div>
+
+    <!-- Completion screen -->
+    <div id="fcDone" style="display:none">
+      <div class="fc-done-inner">
+        <div class="fc-done-emoji" id="fcDoneEmoji">🎉</div>
+        <div class="fc-done-title">Session Complete!</div>
+        <div class="fc-done-sub" id="fcDoneSub">You got 0/0 correct</div>
+        <div class="fc-done-btns">
+          <button class="fc-gen-btn" onclick="fcRestart()">🔄 Restart</button>
+          <button class="fc-export-btn" style="padding:11px 20px" onclick="exportCSV()">⬇ CSV</button>
+          <button class="fc-export-btn" style="padding:11px 20px" onclick="exportAnki()">⬇ Anki</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <div class="lightbox-inner">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <img class="lightbox-img" id="lightboxImg" src="" alt="">
+    <div class="lightbox-caption" id="lightboxCaption"></div>
+    <div class="lightbox-actions">
+      <a class="lightbox-btn" id="lightboxSource" href="#" target="_blank" rel="noopener">🔗 View Source</a>
+      <button class="lightbox-btn" id="lightboxDl" onclick="downloadLightboxImage()">⬇ Download</button>
+    </div>
+  </div>
+</div>
+</body>
+</html>
