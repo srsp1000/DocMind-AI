@@ -1,4 +1,4 @@
-# 🧠 DocMind AI — Enterprise RAG Documentation & Architecture Guide
+# 🧠 DocMind AI — RAG Documentation & Architecture Guide
 
 ![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=flat-square&logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.104+-009688?style=flat-square&logo=fastapi&logoColor=white)
